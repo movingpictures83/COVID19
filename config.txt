@@ -1,57 +1,53 @@
 Prefix pipelines/COVID19/
-#Plugin CSVQuote inputfile CovidNegative.csv outputfile CovidNegative.quoted.csv
-#Plugin CSVQuote inputfile CovidPositive.csv outputfile CovidPositive.quoted.csv
-#Plugin CSVCat inputfile cat.txt outputfile All.quoted.csv
-# Need plugin: CSVCat
-#Plugin CSVFilter inputfile parameters.filter.negative.txt outputfile CovidNegative.quoted.filtered.csv
-#Plugin CSVFilter inputfile parameters.filter.positive.txt outputfile CovidPositive.quoted.filtered.csv
-#Plugin CSVSmooth inputfile smooth.txt outputfile All.quoted.filtered.csv
-#Plugin MetaPrefix inputfile parameters.metaprefix.txt outputfile metadata.csv
 
-#Plugin CSVTranspose inputfile CovidNegative.quoted.filtered.csv outputile test.csv
-#Plugin CSVNormalize inputfile All.quoted.csv outputfile All.quoted.norm.csv
-#Plugin CSVTranspose inputfile All.quoted.norm.csv outputfile All.quoted.norm.transpose.csv
-#Plugin CSVTranspose inputfile metadata.csv outputfile metadata.transpose.csv
-#Plugin CSVTranspose inputfile All.filtered.csv outputfile All.filtered.transpose.csv
+######################################################################################################################
+# PREPROCESSING
+Plugin CSVQuote inputfile CovidNegative.csv outputfile CovidNegative.quoted.csv
+Plugin CSVQuote inputfile CovidPositive.csv outputfile CovidPositive.quoted.csv
+Plugin CSVCat inputfile cat.txt outputfile All.quoted.csv
+Plugin CSVFilter inputfile parameters.filter.negative.txt outputfile CovidNegative.quoted.filtered.csv
+Plugin CSVFilter inputfile parameters.filter.positive.txt outputfile CovidPositive.quoted.filtered.csv
+Plugin CSVSmooth inputfile smooth.txt outputfile All.quoted.filtered.csv
+Plugin MetaPrefix inputfile parameters.metaprefix.txt outputfile metadata.csv
+######################################################################################################################
 
 ######################################################################################################################
 # CLUSTERING
-#Plugin CKMeans inputfile CovidNegative.quoted.filtered.csv outputfile Clustering/CKMeans/CovidNegative.quanta.csv
-#Plugin CKMeans inputfile CovidPositive.quoted.filtered.csv outputfile Clustering/CKMeans/CovidPositive.quanta.csv
-#Plugin GMM inputfile parameters.gmm.txt outputfile Clustering/GMM/output.gmm
-#Plugin KMeans inputfile All.quoted.filtered.csv outputfile Clustering/KMeans/clusters.csv
-#Plugin PAM inputfile All.quoted.filtered.csv outputfile Clustering/PAM/clusters.csv
+Plugin CKMeans inputfile CovidNegative.quoted.filtered.csv outputfile Clustering/CKMeans/CovidNegative.quanta.csv
+Plugin CKMeans inputfile CovidPositive.quoted.filtered.csv outputfile Clustering/CKMeans/CovidPositive.quanta.csv
+Plugin GMM inputfile parameters.gmm.txt outputfile Clustering/GMM/output.gmm
+Plugin KMeans inputfile All.quoted.filtered.csv outputfile Clustering/KMeans/clusters.csv
+Plugin PAM inputfile All.quoted.filtered.csv outputfile Clustering/PAM/clusters.csv
 ######################################################################################################################
 
 ######################################################################################################################
 # LEFSE ESTABLISHES SET
-# Need plugin: CSV2LEfSe
-#Plugin CSVTranspose inputfile All.quoted.filtered.csv outputfile All.quoted.filtered.transpose.csv
-#Plugin CSV2LEfSe inputfile parameters.csv2lefse.txt outputfile samples.lefse.tsv
-#Plugin LEfSe inputfile parameters.lefse.txt outputfile output.lefse
-#Plugin CSVReplace inputfile parameters.csvreplace.txt outputfile output.lefse.replace.csv
+Plugin CSVTranspose inputfile All.quoted.filtered.csv outputfile All.quoted.filtered.transpose.csv
+Plugin CSV2LEfSe inputfile parameters.csv2lefse.txt outputfile samples.lefse.tsv
+Plugin LEfSe inputfile parameters.lefse.txt outputfile output.lefse
+Plugin CSVReplace inputfile parameters.csvreplace.txt outputfile output.lefse.replace.csv
 ######################################################################################################################
 
 ######################################################################################################################
 # DIMENSIONALITY REDUCTION
-#Plugin CSVUnPad inputfile All.quoted.filtered.csv outputfile DimReduc/All.quoted.unpadded.csv
-#Plugin CSVCol inputfile DimReduc/All.quoted.unpadded.csv outputfile DimReduc/features.txt
-#Plugin CSVHead inputfile output.lefse.replace.csv outputfile DimReduc/columns.txt
-#Plugin AES inputfile DimReduc/AES/parameters.txt outputfile DimReduc/AES/output.pdf
-#Plugin CSVUnQuote inputfile All.quoted.filtered.csv outputfile DimReduc/All.unquoted.csv
-#Plugin CSVColumns inputfile parameters.csvcolumns.txt outputfile DimReduc/All.unquoted.screened.csv
-#Plugin CSVQuote inputfile DimReduc/All.unquoted.screened.csv outputfile DimReduc/All.quoted.screened.csv
-#Plugin CSVUnPad inputfile DimReduc/All.quoted.screened.csv outputfile DimReduc/All.quoted.unpadded.screened.csv
-#Plugin ICA inputfile DimReduc/ICA/parameters.txt outputfile DimReduc/ICA/output.pdf
-#Plugin MDS inputfile DimReduc/MDS/parameters.txt outputfile DimReduc/MDS/output.pdf
-#Plugin PCA inputfile DimReduc/PCA/parameters.txt outputfile DimReduc/PCA/output.pdf
-#Plugin CSVPad inputfile DimReduc/All.quoted.unpadded.screened.csv outputfile DimReduc/All.quoted.screened.csv
-#Plugin CSVTranspose inputfile DimReduc/All.quoted.screened.csv outputfile DimReduc/All.quoted.screened.transpose.csv
-#Plugin CSVUnPad inputfile DimReduc/All.quoted.screened.transpose.csv outputfile DimReduc/All.quoted.unpadded.screened.transpose.csv
-#Plugin CSVCrack inputfile DimReduc/All.quoted.unpadded.screened.transpose.csv outputfile DimReduc/All.quoted.unpadded.screened.transpose.removefirst.csv
-#Plugin QuickMeta inputfile quickmeta.txt outputfile DimReduc/obs_names.txt
-#Plugin PLSDA inputfile DimReduc/PLSDA/parameters.txt outputfile DimReduc/PLSDA/output.pdf
-#Plugin SPLSDA inputfile DimReduc/SPLSDA/parameters.txt outputfile DimReduc/SPLSDA/output.pdf
+Plugin CSVUnPad inputfile All.quoted.filtered.csv outputfile DimReduc/All.quoted.unpadded.csv
+Plugin CSVCol inputfile DimReduc/All.quoted.unpadded.csv outputfile DimReduc/features.txt
+Plugin CSVHead inputfile output.lefse.replace.csv outputfile DimReduc/columns.txt
+Plugin AES inputfile DimReduc/AES/parameters.txt outputfile DimReduc/AES/output.pdf
+Plugin CSVUnQuote inputfile All.quoted.filtered.csv outputfile DimReduc/All.unquoted.csv
+Plugin CSVColumns inputfile parameters.csvcolumns.txt outputfile DimReduc/All.unquoted.screened.csv
+Plugin CSVQuote inputfile DimReduc/All.unquoted.screened.csv outputfile DimReduc/All.quoted.screened.csv
+Plugin CSVUnPad inputfile DimReduc/All.quoted.screened.csv outputfile DimReduc/All.quoted.unpadded.screened.csv
+Plugin ICA inputfile DimReduc/ICA/parameters.txt outputfile DimReduc/ICA/output.pdf
+Plugin MDS inputfile DimReduc/MDS/parameters.txt outputfile DimReduc/MDS/output.pdf
+Plugin PCA inputfile DimReduc/PCA/parameters.txt outputfile DimReduc/PCA/output.pdf
+Plugin CSVPad inputfile DimReduc/All.quoted.unpadded.screened.csv outputfile DimReduc/All.quoted.screened.csv
+Plugin CSVTranspose inputfile DimReduc/All.quoted.screened.csv outputfile DimReduc/All.quoted.screened.transpose.csv
+Plugin CSVUnPad inputfile DimReduc/All.quoted.screened.transpose.csv outputfile DimReduc/All.quoted.unpadded.screened.transpose.csv
+Plugin CSVCrack inputfile DimReduc/All.quoted.unpadded.screened.transpose.csv outputfile DimReduc/All.quoted.unpadded.screened.transpose.removefirst.csv
+Plugin QuickMeta inputfile quickmeta.txt outputfile DimReduc/obs_names.txt
+Plugin PLSDA inputfile DimReduc/PLSDA/parameters.txt outputfile DimReduc/PLSDA/output.pdf
+Plugin SPLSDA inputfile DimReduc/SPLSDA/parameters.txt outputfile DimReduc/SPLSDA/output.pdf
 Plugin tSNE inputfile DimReduc/tSNE/parameters.txt outputfile DimReduc/tSNE/output.pdf
 Plugin UMAP inputfile DimReduc/UMAP/parameters.txt outputfile DimReduc/UMAP/output.pdf
 ######################################################################################################################
