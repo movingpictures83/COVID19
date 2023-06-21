@@ -1,0 +1,6 @@
+csvfile DimReduc/All.quoted.unpadded.screened.csv
+features        DimReduc/columns.txt
+categories      DimReduc/catfiles.txt
+k       2
+variables       9
+

@@ -1,0 +1,2 @@
+input1	pipelines/COVID19/CovidNegative.quoted.filtered.screened.csv
+input2	pipelines/COVID19/CovidPositive.quoted.filtered.screened.csv

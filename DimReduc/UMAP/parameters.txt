@@ -1,0 +1,7 @@
+csvfile DimReduc/All.quoted.unpadded.screened.csv
+features        DimReduc/columns.txt
+categories      DimReduc/catfiles.txt
+variables       9
+numneighbors    7
+mindist 1
+spread  5

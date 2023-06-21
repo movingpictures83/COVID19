@@ -1,0 +1,4 @@
+samples	DimReduc/All.quoted.unpadded.screened.transpose.removefirst.csv
+categories	DimReduc/obs_names.txt
+observables	DimReduc/columns.txt
+targets	DimReduc/testsets.txt
