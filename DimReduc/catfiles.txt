@@ -1,0 +1,2 @@
+CovidNegative	DimReduc/CovidNegative.txt
+CovidPositive	DimReduc/CovidPositive.txt
