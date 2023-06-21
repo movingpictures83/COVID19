@@ -1,0 +1,8 @@
+inputfile	samples.lefse.tsv
+class	2
+subject	1
+subclass	-1
+outputdir	biomarkers_raw_images
+wilcoxon_alpha	0.01
+lda_abs_th	3
+anova_alpha	0.01

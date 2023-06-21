@@ -1,0 +1,3 @@
+csvfile	CovidPositive.quoted.csv
+threshold	0.5
+minval	0

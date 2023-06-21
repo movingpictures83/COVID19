@@ -1,0 +1,6 @@
+csvfile	pipelines/COVID19/All.quoted.filtered.csv
+numcomps	2
+distmode	maha_dist
+seedmode	random_subset
+kmeans	10
+EM	10
